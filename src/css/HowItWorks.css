@@ -1,0 +1,71 @@
+.how-it-works{
+    padding:80px;
+    background:#f8fbff;
+    text-align:center;
+}
+
+.how-it-works h2{
+    font-size:40px;
+    color:#1E3A8A;
+}
+
+.how-it-works>p{
+    color:#666;
+    margin-top:15px;
+    margin-bottom:50px;
+}
+
+.steps{
+
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:20px;
+
+}
+
+.step-card{
+
+    background:white;
+    padding:30px 20px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    transition:.3s;
+
+}
+
+.step-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.step-number{
+
+    width:60px;
+    height:60px;
+    background:#2563EB;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+    font-weight:bold;
+    margin:auto;
+    margin-bottom:20px;
+
+}
+
+.step-card h3{
+
+    color:#1E3A8A;
+    margin-bottom:15px;
+
+}
+
+.step-card p{
+
+    color:#555;
+    line-height:1.6;
+
+}
