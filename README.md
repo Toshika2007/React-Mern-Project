@@ -124,3 +124,17 @@ GitHub: [Toshika2007](https://github.com/Toshika2007)
 ---
 
 *Built as an academic project to make complex legal documents easier to understand using AI.*
+
+
+
+## Application Screenshots
+
+### 1. Home Page
+![Home Page](screenshots/Home.png)
+
+### 2. Dashboard
+![Dashboard](screenshots/Dashboard.png)
+
+
+### 4. AI Chat Assistant
+![AI Chat Assistant](screenshots/AIChatbot.png)
