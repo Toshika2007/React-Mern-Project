@@ -1,0 +1,279 @@
+
+.reports-page {
+  min-height: 100vh;
+  padding: 32px;
+  background: #f5f7fb;
+  color: #172033;
+  font-family: Arial, sans-serif;
+}
+
+.reports-header {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+}
+
+.back-btn {
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  border: 1px solid #d9deea;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #26334d;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background: #edf1f8;
+}
+
+.reports-header h1 {
+  margin: 0 0 10px;
+  font-size: 32px;
+  font-weight: 750;
+}
+
+.reports-header p {
+  margin: 0;
+  color: #667085;
+  line-height: 1.6;
+}
+
+.reports-loading {
+  padding: 80px 20px;
+  text-align: center;
+  color: #667085;
+  font-size: 17px;
+}
+
+.report-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto 28px;
+}
+
+.report-card {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e5e9f2;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(23, 32, 51, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.report-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(23, 32, 51, 0.08);
+}
+
+.report-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  background: #eef2ff;
+  font-size: 23px;
+}
+
+.report-card h2 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 750;
+  color: #18243b;
+}
+
+.report-card p {
+  margin: 0;
+  color: #667085;
+  font-size: 14px;
+}
+
+.risk-overview,
+.document-reports {
+  max-width: 1200px;
+  margin: 0 auto 28px;
+  padding: 26px;
+  background: #ffffff;
+  border: 1px solid #e5e9f2;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(23, 32, 51, 0.04);
+}
+
+.risk-overview h2,
+.document-reports > h2 {
+  margin: 0 0 22px;
+  font-size: 21px;
+  color: #202b40;
+}
+
+.risk-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.risk-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid;
+  border-radius: 12px;
+}
+
+.risk-box span {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.risk-box strong {
+  font-size: 27px;
+}
+
+.risk-box.high {
+  color: #b42318;
+  background: #fff1f0;
+  border-color: #ffd5d2;
+}
+
+.risk-box.medium {
+  color: #9a6700;
+  background: #fff8e6;
+  border-color: #f5df9b;
+}
+
+.risk-box.low {
+  color: #18794e;
+  background: #ecfdf3;
+  border-color: #b7ebca;
+}
+
+.report-document {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  border-top: 1px solid #edf0f5;
+}
+
+.report-document:first-of-type {
+  border-top: none;
+}
+
+.report-document-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.report-document-info h3 {
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+  color: #26334d;
+  font-size: 17px;
+}
+
+.report-document-info p {
+  margin: 7px 0;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.report-document button,
+.no-reports button {
+  flex-shrink: 0;
+  padding: 11px 18px;
+  border: none;
+  border-radius: 9px;
+  background: #3157d5;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.report-document button:hover,
+.no-reports button:hover {
+  background: #2445b3;
+}
+
+.no-reports {
+  padding: 38px 20px;
+  border: 1px dashed #d4dbea;
+  border-radius: 12px;
+  text-align: center;
+  background: #fafbfe;
+}
+
+.no-reports h3 {
+  margin: 0 0 10px;
+  color: #26334d;
+}
+
+.no-reports p {
+  margin: 0 0 20px;
+  color: #667085;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .report-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reports-page {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reports-page {
+    padding: 16px;
+  }
+
+  .reports-header h1 {
+    font-size: 27px;
+  }
+
+  .report-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .report-card {
+    padding: 17px;
+  }
+
+  .report-card h2 {
+    font-size: 26px;
+  }
+
+  .risk-overview,
+  .document-reports {
+    padding: 18px;
+  }
+
+  .risk-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .report-document {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .report-document button {
+    width: 100%;
+  }
+}

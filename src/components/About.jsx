@@ -12,15 +12,11 @@ function About() {
                 <h2>About AI Legal Document Simplifier</h2>
 
                 <p>
-
                     AI Legal Document Simplifier is an intelligent web application
                     that helps users understand complex legal documents using
                     Artificial Intelligence.
-
                 </p>
-
                 <p>
-
                     Users can upload contracts, receive AI-generated summaries,
                     identify risky clauses, and interact with an AI-powered
                     assistant to understand legal documents without requiring

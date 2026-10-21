@@ -1,0 +1,597 @@
+/* =========================================
+   DOCUMENT PAGE
+========================================= */
+
+.document-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 40px;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.document-header {
+  max-width: 1400px;
+  margin: 0 auto 30px;
+}
+
+.back-btn {
+  border: none;
+  background: white;
+  color: #2563eb;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.back-btn:hover {
+  background: #eff6ff;
+}
+
+.document-header h1 {
+  margin-top: 28px;
+  font-size: 36px;
+  color: #0f172a;
+}
+
+.document-header p {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* =========================================
+   DOCUMENT CARD
+========================================= */
+
+.document-card {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================
+   FILE INFORMATION
+========================================= */
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.file-icon {
+  width: 65px;
+  height: 65px;
+  background: #eff6ff;
+  border-radius: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
+.file-info h2 {
+  font-size: 21px;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+.uploaded-status {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+
+  background: #dcfce7;
+  color: #15803d;
+
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================================
+   PDF VIEWER SECTION
+========================================= */
+
+.pdf-viewer-section {
+  width: 100%;
+  margin-top: 25px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 15px;
+
+  overflow: hidden;
+  background: #e2e8f0;
+}
+
+/* =========================================
+   PDF TOOLBAR
+========================================= */
+
+.pdf-toolbar {
+  width: 100%;
+  min-height: 64px;
+
+  padding: 10px 18px;
+
+  background: #0f172a;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LEFT - PREVIOUS / PAGE / NEXT */
+
+.page-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* RIGHT - ZOOM */
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* =========================================
+   TOOLBAR BUTTONS
+========================================= */
+
+.pdf-toolbar button {
+  border: none;
+  background: #2563eb;
+  color: white;
+
+  height: 40px;
+  padding: 0 18px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.pdf-toolbar button:hover {
+  background: #1d4ed8;
+}
+
+.pdf-toolbar button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Previous / Next */
+
+.page-controls button {
+  min-width: 105px;
+}
+
+/* Page number */
+
+.page-controls span {
+  min-width: 105px;
+
+  color: white;
+
+  text-align: center;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================================
+   ZOOM CONTROLS
+========================================= */
+
+.zoom-controls button {
+  width: 42px;
+  padding: 0;
+
+  font-size: 20px;
+  border-radius: 0;
+}
+
+.zoom-controls button:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.zoom-controls button:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.zoom-controls span {
+  height: 40px;
+  min-width: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #1e293b;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================================
+   PDF VIEWER AREA
+========================================= */
+
+.pdf-viewer {
+  width: 100%;
+  height: 720px;
+
+  overflow: auto;
+
+  padding: 35px;
+
+  background: #64748b;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* React PDF document */
+
+.pdf-viewer .react-pdf__Document {
+  display: flex;
+  justify-content: center;
+  width: max-content;
+}
+
+/* PDF PAGE */
+
+.pdf-viewer .react-pdf__Page {
+  background: white;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+
+  margin: 0 auto;
+}
+
+/* =========================================
+   AI ANALYSIS
+========================================= */
+
+.analysis-section {
+  margin-top: 25px;
+
+  padding: 28px;
+
+  background: #eff6ff;
+
+  border-radius: 15px;
+}
+
+.analysis-section h2 {
+  color: #1e3a8a;
+  font-size: 22px;
+}
+
+.analysis-section p {
+  margin-top: 8px;
+  margin-bottom: 20px;
+
+  color: #475569;
+
+  line-height: 1.6;
+}
+
+.analyze-btn {
+  border: none;
+
+  background: #2563eb;
+  color: white;
+
+  padding: 13px 25px;
+
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.analyze-btn:hover {
+  background: #1d4ed8;
+}
+
+/* =========================================
+   NO DOCUMENT
+========================================= */
+
+.no-document {
+  max-width: 700px;
+
+  margin: 50px auto;
+
+  background: white;
+
+  padding: 50px;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.no-document h2 {
+  color: #334155;
+  margin-bottom: 20px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .document-page {
+    padding: 25px;
+  }
+
+  .document-card {
+    padding: 22px;
+  }
+
+  .pdf-toolbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .page-controls,
+  .zoom-controls {
+    justify-content: center;
+  }
+
+  .pdf-viewer {
+    height: 650px;
+    padding: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .document-page {
+    padding: 15px;
+  }
+
+  .document-header h1 {
+    font-size: 28px;
+  }
+
+  .document-card {
+    padding: 15px;
+  }
+
+  .file-info h2 {
+    font-size: 17px;
+  }
+
+  .pdf-toolbar {
+    padding: 10px;
+  }
+
+  .page-controls {
+    gap: 5px;
+  }
+
+  .page-controls button {
+    min-width: 85px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .page-controls span {
+    min-width: 80px;
+    font-size: 12px;
+  }
+
+  .pdf-viewer {
+    height: 550px;
+    padding: 15px;
+  }
+}
+/* =========================================
+   EXTRACTED TEXT
+========================================= */
+
+.extracted-text {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid #bfdbfe;
+}
+
+.extracted-text h3 {
+  color: #1e3a8a;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.text-content {
+  background: white;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  padding: 20px;
+
+  max-height: 400px;
+  overflow-y: auto;
+
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+}
+/* =========================================
+   AI ANALYSIS RESULT
+========================================= */
+
+.ai-result {
+  margin-top: 25px;
+  padding: 25px;
+  background: white;
+  border: 1px solid #bfdbfe;
+  border-radius: 15px;
+}
+
+.ai-result h3 {
+  color: #1e3a8a;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.ai-result-content {
+  color: #334155;
+  font-size: 15px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  max-height: 600px;
+  overflow-y: auto;
+}
+/* =========================================
+   AI ANALYSIS CARDS
+========================================= */
+
+.analysis-card {
+  margin-top: 18px;
+  padding: 20px;
+  background: #f8fafc;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+}
+
+.analysis-card h4 {
+  color: #1e3a8a;
+  font-size: 17px;
+  margin-bottom: 12px;
+}
+
+.analysis-card p {
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.summary-card {
+  background: #eff6ff;
+}
+
+.clause-item {
+  padding: 15px;
+  margin-top: 12px;
+  background: white;
+  border-left: 4px solid #2563eb;
+  border-radius: 8px;
+}
+
+.clause-item h5 {
+  color: #1e3a8a;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.clause-item p {
+  margin: 0;
+}
+
+.risk-item {
+  padding: 15px;
+  margin-top: 12px;
+  background: white;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+}
+
+.risk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+
+.risk-header h5 {
+  color: #1e293b;
+  font-size: 15px;
+  margin: 0;
+}
+
+.risk-item p {
+  margin: 0;
+}
+
+.severity {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.severity.low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.severity.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.severity.high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.empty-message {
+  color: #64748b !important;
+  font-style: italic;
+}
+
+.analysis-disclaimer {
+  margin-top: 18px;
+  padding: 16px 20px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 10px;
+}
+
+.analysis-disclaimer h4 {
+  color: #9a3412;
+  font-size: 15px;
+  margin-bottom: 7px;
+}
+
+.analysis-disclaimer p {
+  color: #7c2d12;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}

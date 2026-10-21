@@ -1,32 +1,92 @@
+import { useState } from "react";
 import { auth } from "../firebase";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { useNavigate, Link } from "react-router-dom";
 import "../css/login.css";
-import { Link } from "react-router-dom";
-
+import Toast from "../components/Toast";
+import useToast from "../hooks/useToast";
 
 function Login() {
-
   const navigate = useNavigate();
+  const { toast, showToast, hideToast } = useToast();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
+  // ================= GOOGLE LOGIN =================
   const googleLogin = async () => {
-  try {
-    const provider = new GoogleAuthProvider();
+    try {
+      setGoogleLoading(true);
 
-    await signInWithPopup(auth, provider);
+      const provider = new GoogleAuthProvider();
 
-    alert("Google Login Successful ✅");
+      await signInWithPopup(auth, provider);
 
-    navigate("/dashboard");
+      showToast("Google Login Successful!", "success");
 
-  } catch (error) {
-    console.log(error);
-    alert(error.message);
-  }
-};
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Google login error:", error);
 
-  const handleLogin = (e) => {
+      showToast(error.message, "error");
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
+
+  // ================= EMAIL + PASSWORD LOGIN =================
+  const handleLogin = async (e) => {
     e.preventDefault();
-    navigate("/dashboard");
+
+    if (!email.trim()) {
+      showToast("Please enter your email.", "error");
+      return;
+    }
+
+    if (!password.trim()) {
+      showToast("Please enter your password.", "error");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await signInWithEmailAndPassword(
+        auth,
+        email.trim(),
+        password
+      );
+
+      showToast("Login Successful!", "success");
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Email login error:", error);
+
+      if (
+        error.code === "auth/invalid-credential" ||
+        error.code === "auth/invalid-login-credentials"
+      ) {
+        showToast("Invalid email or password ❌", "error");
+      } else if (error.code === "auth/user-not-found") {
+        showToast("No account found with this email ❌", "error");
+      } else if (error.code === "auth/wrong-password") {
+        showToast("Incorrect password ❌", "error");
+      } else if (error.code === "auth/too-many-requests") {
+        showToast("Too many failed attempts. Please try again later.", "error");
+      } else {
+        showToast(error.message, "error");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -34,79 +94,124 @@ function Login() {
 
       <div className="login-card">
 
+        {/* Logo */}
         <div className="logo">
           ⚖️ AI Legal Document Simplifier
         </div>
 
+        {/* Heading */}
         <h1>Welcome Back 👋</h1>
 
         <p>
           Continue to access AI-powered legal analysis.
         </p>
 
+
+        {/* Login Form */}
         <form onSubmit={handleLogin}>
 
-  <label>Email</label>
+          {/* Email */}
+          <label>Email</label>
 
-  <input
-    type="email"
-    placeholder="Enter your email"
-    required
-  />
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={loading}
+          />
 
-  <label>Password</label>
 
-  <input
-    type="password"
-    placeholder="Enter your password"
-    required
-  />
+          {/* Password */}
+          <label>Password</label>
 
-  <div className="login-options">
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={loading}
+          />
 
-    <label className="remember">
-      <input type="checkbox" />
-      Remember Me
-    </label>
 
-    <a href="#">Forgot Password?</a>
+          {/* Login Options */}
+          <div className="login-options">
 
-  </div>
+            <label className="remember">
 
-  <button type="submit" className="login-btn">
-    Login
-  </button>
+              <input
+                type="checkbox"
+                disabled={loading}
+              />
 
-  <div className="divider">
-    <span>OR</span>
-  </div>
+              Remember Me
 
-  <button
-  type="button"
-  className="google-btn"
-  onClick={googleLogin}
->
+            </label>
 
-    <img
-      src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-      alt="Google"
-    />
+            <a
+              href="#"
+              onClick={(e) => e.preventDefault()}
+            >
+              Forgot Password?
+            </a>
 
-    Continue with Google
+          </div>
 
-  </button>
 
-</form>
+          {/* Login Button */}
+          <button
+            type="submit"
+            className="login-btn"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
 
+
+          {/* Divider */}
+          <div className="divider">
+            <span>OR</span>
+          </div>
+
+
+          {/* Google Login */}
+          <button
+            type="button"
+            className="google-btn"
+            onClick={googleLogin}
+            disabled={googleLoading}
+          >
+
+            <img
+              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+              alt="Google"
+            />
+
+            {googleLoading
+              ? "Signing in..."
+              : "Continue with Google"}
+
+          </button>
+
+        </form>
+
+
+        {/* Register */}
         <p className="register-link">
+
           Don't have an account?
-          <Link to="/register"> Register</Link>
+
+          <Link to="/register">
+            {" "}Register
+          </Link>
+
         </p>
 
       </div>
 
     </div>
-
   );
 }
 

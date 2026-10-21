@@ -1,21 +1,108 @@
+import { useState } from "react";
 import "../css/login.css";
 import { Link, useNavigate } from "react-router-dom";
 
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+
+import { auth } from "../firebase";
+import Toast from "../components/Toast";
+import useToast from "../hooks/useToast";
+
 function Register() {
-
   const navigate = useNavigate();
+  const { toast, showToast, hideToast } = useToast();
 
-  const handleRegister = (e) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
+  // Email + Password Registration
+  const handleRegister = async (e) => {
     e.preventDefault();
 
-    alert("Registration Successful ✅");
+    if (password !== confirmPassword) {
+      showToast("Passwords do not match.", "error");
+      return;
+    }
 
-    navigate("/login");
+    if (password.length < 6) {
+      showToast("Password must be at least 6 characters.", "error");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const userCredential =
+        await createUserWithEmailAndPassword(
+          auth,
+          email.trim(),
+          password
+        );
+
+      // Save user's name in Firebase
+      await updateProfile(userCredential.user, {
+        displayName: name.trim(),
+      });
+
+      showToast("Registration Successful!", "success");
+
+      navigate("/login");
+    } catch (error) {
+      console.error("Registration error:", error);
+
+      if (error.code === "auth/email-already-in-use") {
+        showToast("This email is already registered ❌", "error");
+      } else if (error.code === "auth/invalid-email") {
+        showToast("Invalid email address ❌", "error");
+      } else if (error.code === "auth/weak-password") {
+        showToast("Password is too weak ❌", "error");
+      } else {
+        showToast(error.message, "error");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Google Registration/Login
+  const googleRegister = async () => {
+    try {
+      setGoogleLoading(true);
+
+      const provider = new GoogleAuthProvider();
+
+      await signInWithPopup(auth, provider);
+
+      showToast("Google Registration Successful!", "success");
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Google registration error:", error);
+      showToast(error.message, "error");
+    } finally {
+      setGoogleLoading(false);
+    }
   };
 
   return (
     <div className="login-container">
-
+      {toast && (
+  <Toast
+    message={toast.message}
+    type={toast.type}
+    onClose={hideToast}
+  />
+)}
       <div className="login-card">
 
         <div className="logo">
@@ -35,7 +122,10 @@ function Register() {
           <input
             type="text"
             placeholder="Enter your full name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
+            disabled={loading}
           />
 
           <label>Email</label>
@@ -43,7 +133,10 @@ function Register() {
           <input
             type="email"
             placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading}
           />
 
           <label>Password</label>
@@ -51,7 +144,10 @@ function Register() {
           <input
             type="password"
             placeholder="Create password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={loading}
           />
 
           <label>Confirm Password</label>
@@ -59,14 +155,18 @@ function Register() {
           <input
             type="password"
             placeholder="Confirm password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            disabled={loading}
           />
 
           <button
             type="submit"
             className="login-btn"
+            disabled={loading}
           >
-            Register
+            {loading ? "Creating Account..." : "Register"}
           </button>
 
           <div className="divider">
@@ -76,15 +176,17 @@ function Register() {
           <button
             type="button"
             className="google-btn"
+            onClick={googleRegister}
+            disabled={googleLoading}
           >
-
             <img
               src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
               alt="Google"
             />
 
-            Continue with Google
-
+            {googleLoading
+              ? "Signing in..."
+              : "Continue with Google"}
           </button>
 
         </form>
@@ -95,7 +197,6 @@ function Register() {
         </p>
 
       </div>
-
     </div>
   );
 }
